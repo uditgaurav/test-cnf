@@ -1,0 +1,12 @@
+/doc/
+/libs/
+/lib/
+/.crystal/
+/.shards/
+
+/bin/icr
+src/bin
+
+/bin/*.dwarf
+
+.icr.*.cr

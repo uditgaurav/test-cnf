@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coredns-coredns
+  labels:
+    run: coredns-coredns
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: coredns-coredns
+  template:
+    metadata:
+      labels:
+        run: coredns-coredns
+    spec:
+      containers:
+      - name: coredns-coredns
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            ephemeral-storage: "2Gi"
+          limits:
+            ephemeral-storage: "4Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: coredns-coredns
+  name: coredns-coredns
+  namespace: litmus
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: coredns-coredns

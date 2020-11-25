@@ -1,0 +1,9 @@
+name: popcorn
+version: 0.2.2
+
+authors:
+  - icyleaf <icyleaf.cn@gmail.com>
+
+crystal: 0.31.0
+
+license: MIT

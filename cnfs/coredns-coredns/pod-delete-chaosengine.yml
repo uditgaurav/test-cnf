@@ -1,0 +1,29 @@
+apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosEngine
+metadata:
+  name:  coredns-coredns-conformance-1606316079
+  namespace: default
+spec:
+  jobCleanUpPolicy: 'retain'
+  annotationCheck: 'true'
+  engineState: 'active'
+  #ex. values: ns1:name=percona,ns2:run=nginx 
+  auxiliaryAppInfo: ''
+  appinfo: 
+    appns: 'default'
+    applabel: run=coredns-coredns
+    appkind: 'deployment'
+  chaosServiceAccount: pod-delete-sa 
+  experiments:
+    - name: pod-delete
+      spec:
+        components:
+          env:
+            - name: TOTAL_CHAOS_DURATION
+              value: '30'
+
+            - name: CHAOS_INTERVAL
+              value: '10'
+              
+            - name: FORCE
+              value: 'false'
